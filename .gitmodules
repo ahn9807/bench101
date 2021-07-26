@@ -1,0 +1,18 @@
+[submodule "fio"]
+	path = fio
+	url = https://github.com/axboe/fio.git
+[submodule "gapbs"]
+	path = gapbs
+	url = https://github.com/sbeamer/gapbs.git
+[submodule "leveldb"]
+	path = leveldb
+	url = https://github.com/google/leveldb.git
+[submodule "lmbench"]
+	path = lmbench
+	url = https://github.com/intel/lmbench.git
+[submodule "redis"]
+	path = redis
+	url = https://github.com/redis/redis.git
+[submodule "sysbench"]
+	path = sysbench
+	url = https://github.com/akopytov/sysbench.git

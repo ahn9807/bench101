@@ -6,7 +6,7 @@
 	url = https://github.com/sbeamer/gapbs.git
 [submodule "leveldb"]
 	path = leveldb
-	url = https://github.com/google/leveldb.git
+	url = https://github.com/ahn9807/leveldb.git
 [submodule "lmbench"]
 	path = lmbench
 	url = https://github.com/intel/lmbench.git

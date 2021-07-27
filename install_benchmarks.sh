@@ -47,6 +47,8 @@ cd $DIR_ROOT
 
 ## install Gapbs
 cd $DIR_GAPBS 
+make clean
+export SERIAL=1
 make
 make test
 cd $DIR_ROOT

@@ -1,3 +1,0 @@
-fio_test_file: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=psync, iodepth=1
-fio-3.27-43-g9ce6
-Starting 1 process

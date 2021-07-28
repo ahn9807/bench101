@@ -1,2 +1,4 @@
-./bench/result/*
-./bench/bench/
+bench/result/
+bench/bench/
+bench/
+bench/bench/

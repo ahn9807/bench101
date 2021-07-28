@@ -12,7 +12,7 @@ VALUE_SIZE=4096
 echo run_leveldb
 cd ./bench
 mkdir bench
-$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE 2>&1 | tee ../result/leveldb/leveldb.output
+$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 2>&1 | tee ../result/leveldb/leveldb.output
 cd ..
 
 rm -rf ./bench

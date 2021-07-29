@@ -36,9 +36,9 @@ if [ "$yn" != "${yn#[Yy]}" ] ;then
 			fi
 		else
 			if [[ $test == *"fill"* ]]; then
-				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --benchmarks=$test 2>&1 | grep -e $test | tee ../result/leveldb/leveldb.output
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --benchmarks=$test 2>&1 | grep -e $test | tee -a ../result/leveldb/leveldb.output
 			else
-				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --use_existing_db=1 --benchmarks=$test 2>&1 | grep -e $test | tee ../result/leveldb/leveldb.output
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --use_existing_db=1 --benchmarks=$test 2>&1 | grep -e $test | tee -a ../result/leveldb/leveldb.output
 			fi
 		fi
 		PRINT_META=0
@@ -60,9 +60,9 @@ else
 			fi
 		else
 			if [[ $test == *"fill"* ]]; then
-				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --benchmarks=$test 2>&1 | grep -e $test |  tee ../result/leveldb/leveldb.output
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --benchmarks=$test 2>&1 | grep -e $test |  tee -a ../result/leveldb/leveldb.output
 			else
-				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --use_existing_db=1 --benchmarks=$test 2>&1 | grep -e $test | tee ../result/leveldb/leveldb.output
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --use_existing_db=1 --benchmarks=$test 2>&1 | grep -e $test | tee -a ../result/leveldb/leveldb.output
 			fi
 		fi
 		PRINT_META=0

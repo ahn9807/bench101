@@ -12,6 +12,7 @@ declare -a LEVELDB_TESTS=("fillseq" "fillsync" "fillrandom" "overwrite" "readran
 
 if [[ $EUID -ne 0 ]]; then
 	echo "You have to run this code as root"
+	rm -rf ./bench
 	exit 1
 fi
 
@@ -20,21 +21,53 @@ echo "Host machine's page cache must be deleted to bench accurate device speed w
 echo "Then run this test one by one and delete page cache of your host machine manually"
 read -p "Do you want to test leveldb one by one? [yn] " yn
 
-if [ "$yn" != "${answer#{Yy]}" ] ;then
+if [ "$yn" != "${yn#[Yy]}" ] ;then
 	echo run_leveldb_one_by_one
 	cd ./bench
 	mkdir bench
+	PRINT_META=1 
 	for test in "${LEVELDB_TESTS[@]}"
 	do 
-		$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --benchmarks=$test 2>&1 | tee ../result/leveldb/leveldb.output
-		read -p "please enter to run next test..."
+		if [[ $PRINT_META == 1 ]] ;then
+			if [[ $test == *"fill"* ]]; then
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --benchmarks=$test 2>&1 | tee ../result/leveldb/leveldb.output
+			else
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --use_existing_db=1 --benchmarks=$test 2>&1 | tee ../result/leveldb/leveldb.output
+			fi
+		else
+			if [[ $test == *"fill"* ]]; then
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --benchmarks=$test 2>&1 | grep -e $test | tee ../result/leveldb/leveldb.output
+			else
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --use_existing_db=1 --benchmarks=$test 2>&1 | grep -e $test | tee ../result/leveldb/leveldb.output
+			fi
+		fi
+		PRINT_META=0
+		read -p "please enter to run next test"
 	done
+	cd ..
+else
+	echo run_leveldb
+	cd ./bench
+	mkdir bench
+	PRINT_META=1 
+	for test in "${LEVELDB_TESTS[@]}"
+	do 
+		if [[ $PRINT_META == 1 ]] ;then
+			if [[ $test == *"fill"* ]]; then
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --benchmarks=$test 2>&1 | tee ../result/leveldb/leveldb.output
+			else
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --use_existing_db=1 --benchmarks=$test 2>&1 | tee ../result/leveldb/leveldb.output
+			fi
+		else
+			if [[ $test == *"fill"* ]]; then
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --benchmarks=$test 2>&1 | grep -e $test |  tee ../result/leveldb/leveldb.output
+			else
+				$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 --use_existing_db=1 --benchmarks=$test 2>&1 | grep -e $test | tee ../result/leveldb/leveldb.output
+			fi
+		fi
+		PRINT_META=0
+	done
+	cd ..
 fi
-
-echo run_leveldb
-cd ./bench
-mkdir bench
-$CMD_PREFIX $DISABLE_NUMA $BIN --db=./bench --value_size=$VALUE_SIZE --clear_page_cache=1 2>&1 | tee ../result/leveldb/leveldb.output
-cd ..
 
 rm -rf ./bench

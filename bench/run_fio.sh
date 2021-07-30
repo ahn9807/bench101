@@ -23,7 +23,7 @@ $CMD_PREFIX $DISABLE_NUMA $BIN --rw=write $CMD_POSTFIX 2>&1 | tee ./result/fio/f
 
 echo fio_throughput_rr
 sudo sh -c "echo 1 > /proc/sys/vm/drop_caches"
-$CMD_PREFIX $DISABLE_NUMA $BIN --rw=randread $CMD_POSTFIX 2>&1 | tee ./result/fio/fio_sr.output
+$CMD_PREFIX $DISABLE_NUMA $BIN --rw=randread $CMD_POSTFIX 2>&1 | tee ./result/fio/fio_rr.output
 
 echo fio_throughput_rw
 sudo sh -c "echo 1 > /proc/sys/vm/drop_caches"

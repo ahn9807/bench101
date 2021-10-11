@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -p ./result
+mkdir -p ./result/gapbs
 
 BIN=../gapbs
 DISABLE_NUMA="numactl -N1 -m1"

@@ -12,7 +12,7 @@
 	url = https://github.com/intel/lmbench.git
 [submodule "redis"]
 	path = redis
-	url = https://github.com/redis/redis.git
+	url = https://github.com/ahn9807/redis.git
 [submodule "sysbench"]
 	path = sysbench
 	url = https://github.com/akopytov/sysbench.git

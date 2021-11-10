@@ -10,4 +10,4 @@ echo start testing redis
 
 read -p "type remote ip: " ip
 
-sudo nice -n -20 taskset 1 $DISABLE_NUMA $BIN/redis-benchmark -h $ip -n 500000 -t Get,Set > ./result/redis/redis.out
+sudo nice -n -20 taskset 1 $DISABLE_NUMA $BIN/redis-benchmark -h $ip -n 500000 -t Get,Set | tee ./result/redis/redis.out

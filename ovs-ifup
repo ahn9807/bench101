@@ -1,0 +1,5 @@
+#!/bin/sh
+
+switch='ovs-br0'
+/sbin/ifconfig $1 10.0.0.5 up
+ovs-vsctl add-port ${switch} $1

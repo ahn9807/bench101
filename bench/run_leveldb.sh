@@ -10,7 +10,7 @@ mkdir -p ./result/leveldb
 mkdir -p $DB
 
 WORKING_DIR=$PWD
-BIN=$PWD/../leveldb/build/db_bench
+BIN="$PWD/../leveldb/build/db_bench --num=250000"
 DISABLE_NUMA="numactl -N1 -m1"
 DISABLE_NUMA=""
 CMD_PREFIX="sudo nice -n -20 taskset 1"
